@@ -1,0 +1,1 @@
+document.getElementById("copyright").innerHTML = "&copy; Calculator, 2024 — " + new Date().getFullYear() + ".";
