@@ -4,24 +4,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const equal = document.querySelector("#equal");
     const backspace = document.querySelector("#backspace");
     const clear = document.querySelector("#clear");
+    const error = document.querySelector("#error")
+    const closeError = document.querySelector("#closeError");
     let accumulateNumbers = "";
 
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
-            if(btn.getAttribute("operator")) {
-                accumulateNumbers += " " + btn.getAttribute("actAs") + " ";
-            } else {
-                accumulateNumbers += btn.getAttribute("actAs");
-            }
+            accumulateNumbers += btn.getAttribute("actAs");
             output.textContent = accumulateNumbers;
         })
     })
 
     equal.onclick = () => {
-        if(output.textContent !== "") {
-            const calculation = eval(output.textContent);
-            output.textContent = calculation;
-            accumulateNumbers = "";
+        try {
+            if(output.textContent !== "") {
+                const calculation = eval(output.textContent);
+                output.textContent = calculation;
+                accumulateNumbers = "";
+            }
+        } catch(err) {
+            error.style.display = "block";
         }
     }
 
@@ -32,9 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     backspace.onclick = () => {
         let outputLength = accumulateNumbers.length;
-        if(outputLength <= 2 || outputLength > 2) {
-            const modifiedLength = accumulateNumbers.substring(0, accumulateNumbers.length - 2);
+        if(outputLength <= 1 || outputLength > 1) {
+            let modifiedLength = accumulateNumbers.slice(0, - 1);
+            accumulateNumbers = modifiedLength;
             output.textContent = modifiedLength;
         }
+    }
+
+    closeError.onclick = () => {
+        error.style.display = "none";
     }
 })
