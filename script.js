@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.onkeydown = e => {
         for(const [originalKey, pushedKey] of Object.entries(forKeyHandle)) {
-        switch(e.key) {
-            case originalKey:
-                accumulateNumbers += pushedKey;
-                output.textContent = accumulateNumbers;
-                break;
-            }
+            switch(e.key) {
+                case originalKey:
+                    accumulateNumbers += pushedKey;
+                    output.textContent = accumulateNumbers;
+                    break;
+                }
         }
 
         switch(e.key) {
